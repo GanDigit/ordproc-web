@@ -20,14 +20,14 @@ node {
 
     stage("Docker build") {
         sh 'echo "build Started ...."'
-        sh "docker build -t gandigit/ordproc-order-service ."
+        sh "docker build -t gandigit/ordproc-web ."
         sh 'echo "build Completed ...."'
     }
 
     stage("Docker push") {
         sh 'echo "push Started ...."'
         sh "docker login -u ${env.DOCKER_USER} -p ${env.DOCKER_PASSWORD}"
-        sh "docker push gandigit/ordproc-order-service"
+        sh "docker push gandigit/ordproc-web"
         sh 'echo "push Completed ...."'
     }
     stage("Deploy to staging") {
