@@ -1,4 +1,4 @@
-package com.ord.orderprocessingweb.info;
+package com.ord.orderprocessingweb.model;
 
 public class OrderItem {
 

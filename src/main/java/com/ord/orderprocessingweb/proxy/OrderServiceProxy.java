@@ -1,6 +1,6 @@
 package com.ord.orderprocessingweb.proxy;
 
-import com.ord.orderprocessingweb.info.OrderHeader;
+import com.ord.orderprocessingweb.model.OrderHeader;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.*;
 

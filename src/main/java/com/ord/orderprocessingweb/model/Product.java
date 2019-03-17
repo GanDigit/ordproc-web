@@ -1,17 +1,18 @@
-package com.ord.orderprocessingweb.info;
+package com.ord.orderprocessingweb.model;
+
 
 public class Product {
 
-    private int id;
+    private Integer id;
     private String category;
     private String name;
-    private int price;
+    private Integer price;
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -31,11 +32,11 @@ public class Product {
         this.name = name;
     }
 
-    public int getPrice() {
+    public Integer getPrice() {
         return price;
     }
 
-    public void setPrice(int price) {
+    public void setPrice(Integer price) {
         this.price = price;
     }
 }

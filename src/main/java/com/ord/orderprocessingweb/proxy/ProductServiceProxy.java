@@ -1,23 +1,84 @@
 package com.ord.orderprocessingweb.proxy;
 
-import com.ord.orderprocessingweb.info.Product;
-import org.springframework.cloud.openfeign.FeignClient;
+import com.ord.orderprocessingweb.model.Product;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
+import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.core.env.Environment;
+import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.RestTemplate;
 
+import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
-@FeignClient(name="order-processing-catalog-service")
-public interface ProductServiceProxy {
+@Configuration
+@PropertySource("application.properties")
+public class ProductServiceProxy {
+
+    @Autowired
+    private Environment env;
+
+    @Value("${url.service.catalog}")
+    private String serviceUrlPrefix;
+
+    @Autowired
+    RestTemplate restTemplate;
+
+    public static HttpEntity<String> createEntity() {
+
+        // HttpHeaders
+        HttpHeaders headers = new HttpHeaders();
+
+        headers.setAccept(Arrays.asList(new MediaType[] { MediaType.APPLICATION_JSON }));
+        // Request to return JSON format
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        headers.set("my_other_key", "my_other_value");
+
+        // HttpEntity<String>: To get result as String.
+        HttpEntity<String> entity = new HttpEntity<String>(headers);
+
+        return entity;
+    }
 
     @GetMapping("/products")
-    public List<Product> getAllProducts();
+    public List<Product> getAllProducts() {
+        String url =  serviceUrlPrefix + "products";
+        ResponseEntity<List<Product>> response = restTemplate.exchange(url,  HttpMethod.GET, createEntity(), new ParameterizedTypeReference<List<Product>>(){});
+        List<Product> products = response.getBody();
+        return products;
+    }
 
     @GetMapping("/products/{id}")
-    public Product getProduct(@PathVariable("id") int id);
+    public Product getProduct(@PathVariable("id") int id) {
+        String url =  serviceUrlPrefix + "products/" + id;
+
+        Map params = new HashMap();
+        params.put("id", id);
+
+        Product product = restTemplate.getForObject(url, Product.class);
+        return product;
+
+//        ResponseEntity<Product> response = restTemplate.exchange(url,  HttpMethod.GET, createEntity(), new ParameterizedTypeReference<Product>(){});
+//        Product product = response.getBody();
+//        return product;
+
+    }
 
     @DeleteMapping("/products/{id}")
-    public void deleteProduct(@PathVariable("id") int id);
+    public void deleteProduct(@PathVariable("id") int id) {
+        String url =  serviceUrlPrefix + "products";
+        restTemplate.delete(url, id);
+    }
 
-    @PostMapping("/products")
-    public int saveProduct(@RequestBody Product product) ;
+    @PostMapping("/product")
+    public int saveProduct(@RequestBody Product product) {
+        String url =  serviceUrlPrefix + "products";
+        restTemplate.put(url, Product.class, product);
+        return 0;
+    }
 }

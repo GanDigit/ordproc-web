@@ -1,4 +1,4 @@
-package com.ord.orderprocessingweb.info;
+package com.ord.orderprocessingweb.model;
 
 import java.util.List;
 

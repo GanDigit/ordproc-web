@@ -1,6 +1,6 @@
 package com.ord.orderprocessingweb.controller;
 
-import com.ord.orderprocessingweb.info.OrderHeader;
+import com.ord.orderprocessingweb.model.OrderHeader;
 import com.ord.orderprocessingweb.proxy.OrderServiceProxy;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
