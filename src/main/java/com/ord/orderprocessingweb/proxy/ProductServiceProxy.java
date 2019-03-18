@@ -24,10 +24,23 @@ public class ProductServiceProxy {
     private Environment env;
 
     @Value("${url.service.catalog}")
-    private String serviceUrlPrefix;
+    private String serviceUrlPrefix1;
+
+    @Value("${url.service.catalog2}")
+    private String serviceUrlPrefix2;
 
     @Autowired
     RestTemplate restTemplate;
+
+
+    private String getServiceUrlPrefixURL() {
+        String url = serviceUrlPrefix1;
+        if (serviceUrlPrefix2 != null || serviceUrlPrefix2.length() > 0) {
+            url = serviceUrlPrefix2;
+        }
+        return url;
+    }
+
 
     public static HttpEntity<String> createEntity() {
 
@@ -47,7 +60,7 @@ public class ProductServiceProxy {
 
     @GetMapping("/products")
     public List<Product> getAllProducts() {
-        String url =  serviceUrlPrefix + "products";
+        String url =  getServiceUrlPrefixURL() + "products";
         System.out.println("orders url :" + url);
         ResponseEntity<List<Product>> response = restTemplate.exchange(url,  HttpMethod.GET, createEntity(), new ParameterizedTypeReference<List<Product>>(){});
         List<Product> products = response.getBody();
@@ -56,7 +69,7 @@ public class ProductServiceProxy {
 
     @GetMapping("/products/{id}")
     public Product getProduct(@PathVariable("id") int id) {
-        String url =  serviceUrlPrefix + "products/" + id;
+        String url =  getServiceUrlPrefixURL() + "products/" + id;
 
         Map params = new HashMap();
         params.put("id", id);
@@ -71,13 +84,13 @@ public class ProductServiceProxy {
     }
 
     public void deleteProduct(int id) {
-        String url =  serviceUrlPrefix + "products/" + id;
+        String url =  getServiceUrlPrefixURL() + "products/" + id;
         restTemplate.delete(url);
     }
 
     public int saveProduct(Product product) {
         System.out.println("Hi....");
-        String url =  serviceUrlPrefix + "products";
+        String url =  getServiceUrlPrefixURL() + "products";
         System.out.println(url);
         restTemplate.put(url, product);
         return 0;

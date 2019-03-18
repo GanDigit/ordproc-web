@@ -25,7 +25,10 @@ public class OrderServiceProxy {
     private Environment env;
 
     @Value("${url.service.order}")
-    private String serviceUrlPrefix;
+    private String serviceUrlPrefix1;
+
+    @Value("${url.service.order2}")
+    private String serviceUrlPrefix2;
 
     @Autowired
     RestTemplate restTemplate;
@@ -46,9 +49,18 @@ public class OrderServiceProxy {
         return entity;
     }
 
+    private String getServiceUrlPrefixURL() {
+        String url = serviceUrlPrefix1;
+        if (serviceUrlPrefix2 != null || serviceUrlPrefix2.length() > 0) {
+            url = serviceUrlPrefix2;
+        }
+        return url;
+    }
+
+
     @GetMapping("/orders")
     public List<OrderHeader> getAllOrders() {
-        String url =  serviceUrlPrefix + "orders";
+        String url =  getServiceUrlPrefixURL() + "orders";
         System.out.println("orders url :" + url);
         ResponseEntity<List<OrderHeader>> response = restTemplate.exchange(url,  HttpMethod.GET, createEntity(), new ParameterizedTypeReference<List<OrderHeader>>(){});
         List<OrderHeader> orders = response.getBody();
@@ -57,7 +69,7 @@ public class OrderServiceProxy {
 
     @GetMapping("/orders/{id}")
     public OrderHeader getOrder(@PathVariable("id") int id) {
-        String url =  serviceUrlPrefix + "orders/" + id;
+        String url =  getServiceUrlPrefixURL() + "orders/" + id;
 
         Map params = new HashMap();
         params.put("id", id);
@@ -72,13 +84,13 @@ public class OrderServiceProxy {
     }
 
     public void deleteOrder(int id) {
-        String url =  serviceUrlPrefix + "orders/" + id;
+        String url =  getServiceUrlPrefixURL() + "orders/" + id;
         restTemplate.delete(url);
     }
 
     public int saveOrder(OrderHeader order) {
         System.out.println("Hi....");
-        String url =  serviceUrlPrefix + "orders";
+        String url =  getServiceUrlPrefixURL() + "orders";
         System.out.println(url);
         restTemplate.put(url, order);
         return 0;
