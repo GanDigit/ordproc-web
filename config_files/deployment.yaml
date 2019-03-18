@@ -1,0 +1,32 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: ordproc-web
+  labels:
+    app: ordproc-web
+spec:
+  type: NodePort
+  ports:
+    - port: 8085
+      name: http
+  selector:
+    app: ordproc-web
+---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: ordproc-web
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: ordproc-web
+        version: v1
+    spec:
+      containers:
+        - name: ordproc-web
+          image: gandigit/ordproc-web
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8085
