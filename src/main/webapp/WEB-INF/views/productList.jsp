@@ -9,6 +9,12 @@
 
 <body>
 	<h1 style="color: red">Product List</h1>
+
+       <div>
+            <a href="/addProduct">Add</a>
+       </div>
+
+
 	    <div>
           <table border="1">
             <tr>
@@ -16,6 +22,8 @@
               <th>Category</th>
               <th>Name</th>
               <th>Price</th>
+              <th>Edit</th>
+              <th>Delete</th>
             </tr>
             <c:forEach  items="${products}" var ="product">
             <tr>
@@ -23,9 +31,13 @@
               <td>${product.category}</td>
               <td>${product.name}</td>
               <td>${product.price}</td>
+              <td><a href="/editProducts/${product.id}">Edit</a></td>
+              <td><a href="/deleteProduct/${product.id}">Delete</a></td>
             </tr>
             </c:forEach>
           </table>
         </div>
+
+
 </body>
 </html>

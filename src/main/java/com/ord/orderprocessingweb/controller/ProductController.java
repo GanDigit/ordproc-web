@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
 
@@ -15,14 +16,6 @@ public class ProductController {
 
     @Autowired
     private ProductServiceProxy productServiceProxy;
-
-//    @GetMapping("/products")
-//    private String getAllProducts(Model model) {
-//        String list = productServiceProxy.getAllProducts();
-//        model.addAttribute("products", list);
-//        System.out.println(list);
-//        return "productList";
-//    }
 
     @GetMapping("/products")
     private String getAllProducts(Model model) {
@@ -39,15 +32,40 @@ public class ProductController {
         return "productDetails";
     }
 
-    @DeleteMapping("/products/{id}")
-    private String deleteProduct(Model model, @PathVariable("id") int id) {
-        productServiceProxy.deleteProduct(id);
-        return getAllProducts(model);
+    @GetMapping("/editProducts/{id}")
+    private String editProduct(Model model, @PathVariable("id") int id) {
+        Product product = productServiceProxy.getProduct(id);
+        model.addAttribute("product",product);
+        return "productEdit";
     }
 
-    @PostMapping("/products")
-    private String saveProduct(Model model, @RequestBody Product product) {
+    @GetMapping("/deleteProduct/{id}")
+    private ModelAndView deleteProduct(Model model, @PathVariable("id") int id) {
+        productServiceProxy.deleteProduct(id);
+        return new ModelAndView("redirect:/products");
+    }
+
+    @GetMapping("/addProduct")
+    private String addProduct(Model model) {
+        Product product = new Product();
+        model.addAttribute("product",product);
+        return "productEdit";
+    }
+
+    @PostMapping(value = "/saveProduct")
+    public ModelAndView saveProduct(@RequestParam("id") String id,
+                               @RequestParam("category") String category,@RequestParam("name") String name,
+                               @RequestParam("price") int price) {
+        Product product = new Product();
+        if (id != null && id.length() > 0) {
+            product.setId(Integer.parseInt(id));
+        }
+        product.setCategory(category);
+        product.setName(name);
+        product.setPrice(price);
+
         productServiceProxy.saveProduct(product);
-        return getAllProducts(model);
+
+        return new ModelAndView("redirect:/products");
     }
 }

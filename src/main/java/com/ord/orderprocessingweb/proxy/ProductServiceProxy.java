@@ -69,16 +69,16 @@ public class ProductServiceProxy {
 
     }
 
-    @DeleteMapping("/products/{id}")
-    public void deleteProduct(@PathVariable("id") int id) {
-        String url =  serviceUrlPrefix + "products";
-        restTemplate.delete(url, id);
+    public void deleteProduct(int id) {
+        String url =  serviceUrlPrefix + "products/" + id;
+        restTemplate.delete(url);
     }
 
-    @PostMapping("/product")
-    public int saveProduct(@RequestBody Product product) {
+    public int saveProduct(Product product) {
+        System.out.println("Hi....");
         String url =  serviceUrlPrefix + "products";
-        restTemplate.put(url, Product.class, product);
+        System.out.println(url);
+        restTemplate.put(url, product);
         return 0;
     }
 }
