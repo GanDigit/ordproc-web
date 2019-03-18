@@ -19,7 +19,7 @@ public class OrderController {
     @Autowired
     OrderServiceProxy orderServiceProxy;
 
-    @GetMapping("/orders")
+    @GetMapping("/TTorders")
     private String getAllOrders(Model model) {
         List<OrderHeader> list = orderServiceProxy.getAllOrders();
         model.addAttribute("orders", list);
@@ -27,34 +27,34 @@ public class OrderController {
         return "orderList";
     }
 
-    @GetMapping("/orders/{id}")
+    @GetMapping("/TTorders/{id}")
     private String getOrder(Model model, @PathVariable("id") int id) {
         OrderHeader order = orderServiceProxy.getOrder(id);
         model.addAttribute("order",order);
         return "orderDetails";
     }
 
-    @GetMapping("/editOrders/{id}")
+    @GetMapping("/TTeditOrders/{id}")
     private String editOrder(Model model, @PathVariable("id") int id) {
         OrderHeader order = orderServiceProxy.getOrder(id);
         model.addAttribute("order",order);
         return "orderEdit";
     }
 
-    @GetMapping("/deleteOrder/{id}")
+    @GetMapping("/TTdeleteOrder/{id}")
     private ModelAndView deleteOrder(Model model, @PathVariable("id") int id) {
         orderServiceProxy.deleteOrder(id);
         return new ModelAndView("redirect:/orders");
     }
 
-    @GetMapping("/addOrder")
+    @GetMapping("/TTaddOrder")
     private String addOrder(Model model) {
         OrderHeader order = new OrderHeader();
         model.addAttribute("order",order);
         return "orderEdit";
     }
 
-    @PostMapping(value = "/saveOrder")
+    @PostMapping(value = "/TTsaveOrder")
     public ModelAndView saveOrder(@RequestParam("id") String id,
                                     @RequestParam("referenceText") String referenceText,@RequestParam("userName") String userName) {
         OrderHeader order = new OrderHeader();

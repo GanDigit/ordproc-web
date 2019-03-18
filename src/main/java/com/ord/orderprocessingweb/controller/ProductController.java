@@ -17,7 +17,7 @@ public class ProductController {
     @Autowired
     private ProductServiceProxy productServiceProxy;
 
-    @GetMapping("/products")
+    @GetMapping("/TTproducts")
     private String getAllProducts(Model model) {
         List<Product> list = productServiceProxy.getAllProducts();
         model.addAttribute("products", list);
@@ -25,34 +25,34 @@ public class ProductController {
         return "productList";
     }
 
-    @GetMapping("/products/{id}")
+    @GetMapping("/TTproducts/{id}")
     private String getProduct(Model model, @PathVariable("id") int id) {
         Product product = productServiceProxy.getProduct(id);
         model.addAttribute("product",product);
         return "productDetails";
     }
 
-    @GetMapping("/editProducts/{id}")
+    @GetMapping("/TTeditProducts/{id}")
     private String editProduct(Model model, @PathVariable("id") int id) {
         Product product = productServiceProxy.getProduct(id);
         model.addAttribute("product",product);
         return "productEdit";
     }
 
-    @GetMapping("/deleteProduct/{id}")
+    @GetMapping("/TTdeleteProduct/{id}")
     private ModelAndView deleteProduct(Model model, @PathVariable("id") int id) {
         productServiceProxy.deleteProduct(id);
         return new ModelAndView("redirect:/products");
     }
 
-    @GetMapping("/addProduct")
+    @GetMapping("/TTaddProduct")
     private String addProduct(Model model) {
         Product product = new Product();
         model.addAttribute("product",product);
         return "productEdit";
     }
 
-    @PostMapping(value = "/saveProduct")
+    @PostMapping(value = "/TTsaveProduct")
     public ModelAndView saveProduct(@RequestParam("id") String id,
                                @RequestParam("category") String category,@RequestParam("name") String name,
                                @RequestParam("price") int price) {
