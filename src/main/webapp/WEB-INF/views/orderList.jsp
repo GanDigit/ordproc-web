@@ -1,3 +1,5 @@
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -6,18 +8,30 @@
 </head>
 <body>
 	<h1 style="color: red">Order List</h1>
-	<div class="container">
-		<div class="row">
-			<h2>User Profiles</h2>
-			<ul>
-				<c:forEach items="${orderHeaders}" var="orderHeader">
-					<li><a href="userDetails?id=${orderHeader.id}">${orderHeader.id}</a></li>
-					<li><a href="userDetails?id=${orderHeader.id}">${orderHeader.referenceText}</a></li>
-					<li><a href="userDetails?id=${orderHeader.id}">${orderHeader.userName}</a></li>
-				</c:forEach>
-			</ul>
-		</div>
-	</div>
+   <div>
+        <a href="/addOrder">Add</a>
+   </div>
+
+    <div>
+      <table border="1">
+        <tr>
+          <th>ID</th>
+          <th>Reference Text</th>
+          <th>User Name</th>
+          <th>Edit</th>
+          <th>Delete</th>
+        </tr>
+        <c:forEach  items="${orders}" var ="order">
+        <tr>
+          <td><a href="/orders/${order.id}">${order.id}</a></td>
+          <td>${order.referenceText}</td>
+          <td>${order.userName}</td>
+          <td><a href="/editOrders/${order.id}">Edit</a></td>
+          <td><a href="/deleteOrder/${order.id}">Delete</a></td>
+        </tr>
+        </c:forEach>
+      </table>
+    </div>
 
 </body>
 </html>

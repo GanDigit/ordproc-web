@@ -48,6 +48,7 @@ public class ProductServiceProxy {
     @GetMapping("/products")
     public List<Product> getAllProducts() {
         String url =  serviceUrlPrefix + "products";
+        System.out.println("orders url :" + url);
         ResponseEntity<List<Product>> response = restTemplate.exchange(url,  HttpMethod.GET, createEntity(), new ParameterizedTypeReference<List<Product>>(){});
         List<Product> products = response.getBody();
         return products;
