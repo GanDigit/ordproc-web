@@ -112,6 +112,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _order_app_order_add_order_add_component__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./order-app/order-add/order-add.component */ "./src/app/order-app/order-add/order-add.component.ts");
 /* harmony import */ var _order_app_order_detail_order_detail_component__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./order-app/order-detail/order-detail.component */ "./src/app/order-app/order-detail/order-detail.component.ts");
 /* harmony import */ var _order_app_order_edit_order_edit_component__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./order-app/order-edit/order-edit.component */ "./src/app/order-app/order-edit/order-edit.component.ts");
+/* harmony import */ var _config_app_config_config_component__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./config-app/config/config.component */ "./src/app/config-app/config/config.component.ts");
+
 
 
 
@@ -171,6 +173,11 @@ var appRoutes = [
         path: 'order-edit/:id',
         component: _order_app_order_edit_order_edit_component__WEBPACK_IMPORTED_MODULE_14__["OrderEditComponent"],
         data: { title: 'Order Edit' }
+    },
+    {
+        path: 'update-config*',
+        component: _config_app_config_config_component__WEBPACK_IMPORTED_MODULE_15__["ConfigComponent"],
+        data: { title: 'Config Details' }
     }
 ];
 var AppModule = /** @class */ (function () {
@@ -187,7 +194,8 @@ var AppModule = /** @class */ (function () {
                 _order_app_order_order_component__WEBPACK_IMPORTED_MODULE_11__["OrderComponent"],
                 _order_app_order_add_order_add_component__WEBPACK_IMPORTED_MODULE_12__["OrderAddComponent"],
                 _order_app_order_detail_order_detail_component__WEBPACK_IMPORTED_MODULE_13__["OrderDetailComponent"],
-                _order_app_order_edit_order_edit_component__WEBPACK_IMPORTED_MODULE_14__["OrderEditComponent"]
+                _order_app_order_edit_order_edit_component__WEBPACK_IMPORTED_MODULE_14__["OrderEditComponent"],
+                _config_app_config_config_component__WEBPACK_IMPORTED_MODULE_15__["ConfigComponent"]
             ],
             imports: [
                 _angular_router__WEBPACK_IMPORTED_MODULE_8__["RouterModule"].forRoot(appRoutes),
@@ -200,6 +208,115 @@ var AppModule = /** @class */ (function () {
         })
     ], AppModule);
     return AppModule;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/config-app/config/config.component.css":
+/*!********************************************************!*\
+  !*** ./src/app/config-app/config/config.component.css ***!
+  \********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL2NvbmZpZy1hcHAvY29uZmlnL2NvbmZpZy5jb21wb25lbnQuY3NzIn0= */"
+
+/***/ }),
+
+/***/ "./src/app/config-app/config/config.component.html":
+/*!*********************************************************!*\
+  !*** ./src/app/config-app/config/config.component.html ***!
+  \*********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "<p>\n  config works!\n</p>\n"
+
+/***/ }),
+
+/***/ "./src/app/config-app/config/config.component.ts":
+/*!*******************************************************!*\
+  !*** ./src/app/config-app/config/config.component.ts ***!
+  \*******************************************************/
+/*! exports provided: ConfigComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ConfigComponent", function() { return ConfigComponent; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _rest_config_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../rest-config.service */ "./src/app/config-app/rest-config.service.ts");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
+
+
+
+
+var ConfigComponent = /** @class */ (function () {
+    function ConfigComponent(rest, route, router) {
+        this.rest = rest;
+        this.route = route;
+        this.router = router;
+        this.endPoint_CatalogSerivce = 'http://localhost:8082/';
+        this.endPoint_OrderSerivce = 'http://localhost:8081/';
+    }
+    ConfigComponent.prototype.ngOnInit = function () {
+    };
+    ConfigComponent.prototype.processConfig = function () {
+        var key = this.route.snapshot.params['key'];
+        var value = this.route.snapshot.params['value'];
+        console.log("key-->" + key);
+        console.log("Value-->" + value);
+        if (key === "catalog") {
+            console.log("Key Catalog-->");
+            this.endPoint_CatalogSerivce = value;
+        }
+        else if (key === "order") {
+            console.log("Key order-->");
+            this.endPoint_OrderSerivce = value;
+        }
+    };
+    ConfigComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
+            selector: 'app-config',
+            template: __webpack_require__(/*! ./config.component.html */ "./src/app/config-app/config/config.component.html"),
+            styles: [__webpack_require__(/*! ./config.component.css */ "./src/app/config-app/config/config.component.css")]
+        }),
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_rest_config_service__WEBPACK_IMPORTED_MODULE_2__["RestConfigService"], _angular_router__WEBPACK_IMPORTED_MODULE_3__["ActivatedRoute"], _angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"]])
+    ], ConfigComponent);
+    return ConfigComponent;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/config-app/rest-config.service.ts":
+/*!***************************************************!*\
+  !*** ./src/app/config-app/rest-config.service.ts ***!
+  \***************************************************/
+/*! exports provided: RestConfigService */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RestConfigService", function() { return RestConfigService; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+
+
+var RestConfigService = /** @class */ (function () {
+    function RestConfigService() {
+    }
+    RestConfigService = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])({
+            providedIn: 'root'
+        }),
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [])
+    ], RestConfigService);
+    return RestConfigService;
 }());
 
 
@@ -536,9 +653,6 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var endpoint1 = 'http://localhost:3000/api/v1/';
-var endpoint2 = 'http://9.204.168.81:30035/';
-var endpoint = 'http://localhost:8081/';
 var httpOptions = {
     headers: new _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpHeaders"]({
         'Content-Type': 'application/json',
@@ -548,26 +662,34 @@ var httpOptions = {
 var RestOrderService = /** @class */ (function () {
     function RestOrderService(http) {
         this.http = http;
+        //endpoint = 'http://localhost:8081/';
+        this.endpoint = 'http://9.204.168.81:31494/';
     }
+    RestOrderService.prototype.getEndPoint = function () {
+        return this.endpoint;
+    };
     RestOrderService.prototype.extractData = function (res) {
         var body = res;
         return body || {};
     };
     RestOrderService.prototype.getOrders = function () {
-        return this.http.get(endpoint + 'orders').pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["map"])(this.extractData));
+        console.log("EndPoint 1-->" + this.getEndPoint());
+        console.log("EndPoint 11-->" + this.endpoint);
+        return this.http.get(this.endpoint + 'orders').pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["map"])(this.extractData));
     };
     RestOrderService.prototype.getOrder = function (id) {
-        return this.http.get(endpoint + 'orders/' + id).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["map"])(this.extractData));
+        console.log("EndPoint 2-->" + this.getEndPoint());
+        return this.http.get(this.getEndPoint() + 'orders/' + id).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["map"])(this.extractData));
     };
     RestOrderService.prototype.addOrder = function (order) {
         console.log(order);
-        return this.http.put(endpoint + 'orders', JSON.stringify(order), httpOptions).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["tap"])(function (order) { return console.log("added order w/ id=" + order.id); }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["catchError"])(this.handleError('addOrder')));
+        return this.http.put(this.getEndPoint() + 'orders', JSON.stringify(order), httpOptions).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["tap"])(function (order) { return console.log("added order w/ id=" + order.id); }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["catchError"])(this.handleError('addOrder')));
     };
     RestOrderService.prototype.updateOrder = function (id, order) {
-        return this.http.put(endpoint + 'orders', JSON.stringify(order), httpOptions).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["tap"])(function (_) { return console.log("updated order id=" + id); }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["catchError"])(this.handleError('updateOrder')));
+        return this.http.put(this.getEndPoint() + 'orders', JSON.stringify(order), httpOptions).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["tap"])(function (_) { return console.log("updated order id=" + id); }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["catchError"])(this.handleError('updateOrder')));
     };
     RestOrderService.prototype.deleteOrder = function (id) {
-        return this.http.delete(endpoint + 'orders/' + id, httpOptions).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["tap"])(function (_) { return console.log("deleted order id=" + id); }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["catchError"])(this.handleError('deleteOrder')));
+        return this.http.delete(this.getEndPoint() + 'orders/' + id, httpOptions).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["tap"])(function (_) { return console.log("deleted order id=" + id); }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["catchError"])(this.handleError('deleteOrder')));
     };
     RestOrderService.prototype.handleError = function (operation, result) {
         if (operation === void 0) { operation = 'operation'; }
@@ -923,8 +1045,6 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var endpoint = 'http://9.204.168.81:30371/';
-var endpoint2 = 'http://localhost:8082/';
 var httpOptions = {
     headers: new _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpHeaders"]({
         'Content-Type': 'application/json',
@@ -934,7 +1054,12 @@ var httpOptions = {
 var RestService = /** @class */ (function () {
     function RestService(http) {
         this.http = http;
+        //endpoint = 'http://localhost:8082/';
+        this.endpoint = 'http://9.204.168.81:32381/';
     }
+    RestService.prototype.getEndPoint = function () {
+        return this.endpoint;
+    };
     RestService.prototype.extractData = function (res) {
         var body = res;
         console.log('extractData--> ${res}');
@@ -942,20 +1067,20 @@ var RestService = /** @class */ (function () {
     };
     RestService.prototype.getProducts = function () {
         console.log('getProducts--> sdf');
-        return this.http.get(endpoint + 'products').pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["map"])(this.extractData));
+        return this.http.get(this.getEndPoint() + 'products').pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["map"])(this.extractData));
     };
     RestService.prototype.getProduct = function (id) {
-        return this.http.get(endpoint + 'products/' + id).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["map"])(this.extractData));
+        return this.http.get(this.getEndPoint() + 'products/' + id).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["map"])(this.extractData));
     };
     RestService.prototype.addProduct = function (product) {
         console.log("Add product ---> " + JSON.stringify(product));
-        return this.http.put(endpoint + 'products', JSON.stringify(product), httpOptions).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["tap"])(function (product) { return console.log("added product w/ id=" + product.id); }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["catchError"])(this.handleError('addProduct')));
+        return this.http.put(this.getEndPoint() + 'products', JSON.stringify(product), httpOptions).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["tap"])(function (product) { return console.log("added product w/ id=" + product.id); }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["catchError"])(this.handleError('addProduct')));
     };
     RestService.prototype.updateProduct = function (id, product) {
-        return this.http.put(endpoint + 'products', JSON.stringify(product), httpOptions).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["tap"])(function (_) { return console.log("updated product id=" + id); }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["catchError"])(this.handleError('updateProduct')));
+        return this.http.put(this.getEndPoint() + 'products', JSON.stringify(product), httpOptions).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["tap"])(function (_) { return console.log("updated product id=" + id); }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["catchError"])(this.handleError('updateProduct')));
     };
     RestService.prototype.deleteProduct = function (id) {
-        return this.http.delete(endpoint + 'products/' + id, httpOptions).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["tap"])(function (_) { return console.log("deleted product id=" + id); }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["catchError"])(this.handleError('deleteProduct')));
+        return this.http.delete(this.getEndPoint() + 'products/' + id, httpOptions).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["tap"])(function (_) { return console.log("deleted product id=" + id); }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["catchError"])(this.handleError('deleteProduct')));
     };
     RestService.prototype.handleError = function (operation, result) {
         if (operation === void 0) { operation = 'operation'; }
