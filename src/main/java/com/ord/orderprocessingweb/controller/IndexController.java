@@ -7,6 +7,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import java.util.Map;
 
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 @Controller
 public class IndexController {
 

@@ -1118,11 +1118,8 @@ __webpack_require__.r(__webpack_exports__);
 // The list of file replacements can be found in `angular.json`.
 var environment = {
     production: false,
-    catalogServiceURL1: 'http://9.204.168.81:31494/',
-    orderServiceURL1: 'http://9.204.168.81:32381/',
-    catalogServiceURL: 'http://localhost:8087/',
-    orderServiceURL: 'http://localhost:8086/',
-    temp: ''
+    catalogServiceURL: 'http://orderproc16-catalog-service/',
+    orderServiceURL: 'http://orderproc16-order-service/'
 };
 /*
  * For easier debugging in development mode, you can import the following file

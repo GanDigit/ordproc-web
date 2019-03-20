@@ -4,8 +4,8 @@
 
 export const environment = {
   production: false,
-  catalogServiceURL: 'http://9.204.168.81:31380/' ,
-  orderServiceURL: 'http://9.204.168.81:31380/'
+  catalogServiceURL: 'http://orderproc16-catalog-service/' ,
+  orderServiceURL: 'http://orderproc16-order-service/'
 };
 
 /*
