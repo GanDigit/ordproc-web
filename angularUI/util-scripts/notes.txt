@@ -1,0 +1,21 @@
+------------------- gradle build--------------------
+Run the build.sh.
+
+>> build.sh
+
+------------------- Docker build--------------------
+Run docker build command  (docker_build.sh)
+
+>> docker build -t gandigit/ordproc-order-service .
+
+
+------------------- Docker run--------------------
+Run docker run command. Expose the port like the below. (docker_run.sh)
+
+>> docker run -p 8087:8082 gandigit/ordproc-catalog-service
+
+
+------------------- Access the application --------------------
+http://localhost:8087/products
+
+http://localhost:8087/products/10002

@@ -1,0 +1,5 @@
+export const environment = {
+  production: true,
+  catalogServiceURL: '<URL_SERVICE_CATALOG>/' ,
+  orderServiceURL: '<ORDER_SERVICE_URL>/'
+};
