@@ -1,0 +1,19 @@
+------------------- gradle build--------------------
+Run the build.sh.
+
+>> build.sh
+
+------------------- Docker build--------------------
+Run docker build command  (docker_build.sh)
+
+>> docker build -t gandigit/ordproc-web .
+
+
+------------------- Docker run--------------------
+Run docker run command. Expose the port like the below. (docker_run.sh)
+
+>> docker run -p 8088:8085 gandigit/ordproc-web
+
+
+------------------- Access the application --------------------
+http://localhost:8088

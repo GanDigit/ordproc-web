@@ -648,6 +648,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
 /* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! rxjs */ "./node_modules/rxjs/_esm5/index.js");
 /* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! rxjs/operators */ "./node_modules/rxjs/_esm5/operators/index.js");
+/* harmony import */ var _environments_environment__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../environments/environment */ "./src/environments/environment.ts");
+
 
 
 
@@ -662,34 +664,27 @@ var httpOptions = {
 var RestOrderService = /** @class */ (function () {
     function RestOrderService(http) {
         this.http = http;
-        //endpoint = 'http://localhost:8081/';
-        this.endpoint = 'http://9.204.168.81:31494/';
+        this.endpoint = _environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].orderServiceURL;
     }
-    RestOrderService.prototype.getEndPoint = function () {
-        return this.endpoint;
-    };
     RestOrderService.prototype.extractData = function (res) {
         var body = res;
         return body || {};
     };
     RestOrderService.prototype.getOrders = function () {
-        console.log("EndPoint 1-->" + this.getEndPoint());
-        console.log("EndPoint 11-->" + this.endpoint);
         return this.http.get(this.endpoint + 'orders').pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["map"])(this.extractData));
     };
     RestOrderService.prototype.getOrder = function (id) {
-        console.log("EndPoint 2-->" + this.getEndPoint());
-        return this.http.get(this.getEndPoint() + 'orders/' + id).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["map"])(this.extractData));
+        return this.http.get(this.endpoint + 'orders/' + id).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["map"])(this.extractData));
     };
     RestOrderService.prototype.addOrder = function (order) {
         console.log(order);
-        return this.http.put(this.getEndPoint() + 'orders', JSON.stringify(order), httpOptions).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["tap"])(function (order) { return console.log("added order w/ id=" + order.id); }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["catchError"])(this.handleError('addOrder')));
+        return this.http.put(this.endpoint + 'orders', JSON.stringify(order), httpOptions).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["tap"])(function (order) { return console.log("added order w/ id=" + order.id); }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["catchError"])(this.handleError('addOrder')));
     };
     RestOrderService.prototype.updateOrder = function (id, order) {
-        return this.http.put(this.getEndPoint() + 'orders', JSON.stringify(order), httpOptions).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["tap"])(function (_) { return console.log("updated order id=" + id); }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["catchError"])(this.handleError('updateOrder')));
+        return this.http.put(this.endpoint + 'orders', JSON.stringify(order), httpOptions).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["tap"])(function (_) { return console.log("updated order id=" + id); }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["catchError"])(this.handleError('updateOrder')));
     };
     RestOrderService.prototype.deleteOrder = function (id) {
-        return this.http.delete(this.getEndPoint() + 'orders/' + id, httpOptions).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["tap"])(function (_) { return console.log("deleted order id=" + id); }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["catchError"])(this.handleError('deleteOrder')));
+        return this.http.delete(this.endpoint + 'orders/' + id, httpOptions).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["tap"])(function (_) { return console.log("deleted order id=" + id); }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["catchError"])(this.handleError('deleteOrder')));
     };
     RestOrderService.prototype.handleError = function (operation, result) {
         if (operation === void 0) { operation = 'operation'; }
@@ -1040,6 +1035,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
 /* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! rxjs */ "./node_modules/rxjs/_esm5/index.js");
 /* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! rxjs/operators */ "./node_modules/rxjs/_esm5/operators/index.js");
+/* harmony import */ var _environments_environment__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../environments/environment */ "./src/environments/environment.ts");
+
 
 
 
@@ -1054,33 +1051,33 @@ var httpOptions = {
 var RestService = /** @class */ (function () {
     function RestService(http) {
         this.http = http;
-        //endpoint = 'http://localhost:8082/';
-        this.endpoint = 'http://9.204.168.81:32381/';
+        this.endpoint = _environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].catalogServiceURL;
     }
-    RestService.prototype.getEndPoint = function () {
-        return this.endpoint;
+    RestService.prototype.extractDataString = function (res) {
+        var body = res;
+        var result = body || {};
+        //this.endpointPort = result + "";
+        return result;
     };
     RestService.prototype.extractData = function (res) {
         var body = res;
-        console.log('extractData--> ${res}');
         return body || {};
     };
     RestService.prototype.getProducts = function () {
-        console.log('getProducts--> sdf');
-        return this.http.get(this.getEndPoint() + 'products').pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["map"])(this.extractData));
+        return this.http.get(this.endpoint + 'products').pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["map"])(this.extractData));
     };
     RestService.prototype.getProduct = function (id) {
-        return this.http.get(this.getEndPoint() + 'products/' + id).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["map"])(this.extractData));
+        return this.http.get(this.endpoint + 'products/' + id).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["map"])(this.extractData));
     };
     RestService.prototype.addProduct = function (product) {
         console.log("Add product ---> " + JSON.stringify(product));
-        return this.http.put(this.getEndPoint() + 'products', JSON.stringify(product), httpOptions).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["tap"])(function (product) { return console.log("added product w/ id=" + product.id); }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["catchError"])(this.handleError('addProduct')));
+        return this.http.put(this.endpoint + 'products', JSON.stringify(product), httpOptions).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["tap"])(function (product) { return console.log("added product w/ id=" + product.id); }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["catchError"])(this.handleError('addProduct')));
     };
     RestService.prototype.updateProduct = function (id, product) {
-        return this.http.put(this.getEndPoint() + 'products', JSON.stringify(product), httpOptions).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["tap"])(function (_) { return console.log("updated product id=" + id); }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["catchError"])(this.handleError('updateProduct')));
+        return this.http.put(this.endpoint + 'products', JSON.stringify(product), httpOptions).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["tap"])(function (_) { return console.log("updated product id=" + id); }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["catchError"])(this.handleError('updateProduct')));
     };
     RestService.prototype.deleteProduct = function (id) {
-        return this.http.delete(this.getEndPoint() + 'products/' + id, httpOptions).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["tap"])(function (_) { return console.log("deleted product id=" + id); }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["catchError"])(this.handleError('deleteProduct')));
+        return this.http.delete(this.endpoint + 'products/' + id, httpOptions).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["tap"])(function (_) { return console.log("deleted product id=" + id); }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["catchError"])(this.handleError('deleteProduct')));
     };
     RestService.prototype.handleError = function (operation, result) {
         if (operation === void 0) { operation = 'operation'; }
@@ -1120,7 +1117,12 @@ __webpack_require__.r(__webpack_exports__);
 // `ng build --prod` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
 var environment = {
-    production: false
+    production: false,
+    catalogServiceURL1: 'http://9.204.168.81:31494/',
+    orderServiceURL1: 'http://9.204.168.81:32381/',
+    catalogServiceURL: 'http://localhost:8087/',
+    orderServiceURL: 'http://localhost:8086/',
+    temp: ''
 };
 /*
  * For easier debugging in development mode, you can import the following file
@@ -1167,7 +1169,7 @@ Object(_angular_platform_browser_dynamic__WEBPACK_IMPORTED_MODULE_1__["platformB
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /Users/jeyagandhi/Gandhi/Projects/Apps/OrderProcessing/orderprocessingwebclient/ordproc-ui/src/main.ts */"./src/main.ts");
+module.exports = __webpack_require__(/*! /Users/jeyagandhi/Gandhi/Projects/Apps/OrderProcessing/ordproc-web/angularUI/src/main.ts */"./src/main.ts");
 
 
 /***/ })
