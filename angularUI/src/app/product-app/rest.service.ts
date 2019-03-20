@@ -34,12 +34,12 @@ export class RestService {
   }
 
   getProducts(): Observable<any> {
-    return this.http.get(this.endpoint + 'products').pipe(
+    return this.http.get(this.endpoint + 'products', httpOptions).pipe(
       map(this.extractData));
   }
   
   getProduct(id): Observable<any> {
-    return this.http.get(this.endpoint + 'products/' + id).pipe(
+    return this.http.get(this.endpoint + 'products/' + id, httpOptions).pipe(
       map(this.extractData));
   }
   

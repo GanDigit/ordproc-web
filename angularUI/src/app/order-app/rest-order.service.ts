@@ -27,12 +27,12 @@ export class RestOrderService {
   }
 
   getOrders(): Observable<any> {
-    return this.http.get(this.endpoint + 'orders').pipe(
+    return this.http.get(this.endpoint + 'orders', httpOptions).pipe(
       map(this.extractData));
   }
   
   getOrder(id): Observable<any> {
-    return this.http.get(this.endpoint + 'orders/' + id).pipe(
+    return this.http.get(this.endpoint + 'orders/' + id, httpOptions).pipe(
       map(this.extractData));
   }
   
